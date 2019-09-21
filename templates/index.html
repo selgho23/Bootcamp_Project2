@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FOOD AND WINE!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+  
 </head>
 
-<body background="wine-2562209_1920.jpg" >
+<body>
+    
     <div class="container">
         <div class="jumbotron" style="text-align: center">
             <h1>ENJOY YOUR DINNER</h1>
@@ -40,14 +44,18 @@
                           </ul>
                         </div>
                         <button id="filter-btn" type="submit" class="btn btn-default">Find wine pair</button>
+                        <button id="food_trivia" type="submit" class="btn btn-default">Food Trivia of the Day</button>
+                        
                       </form>
                     </div>
                   </div>
                 </aside>
               </div>
+              <div class = "col-md-4 sidebar">
+                
               <div class="col-md-10">
                 <div id="table-area" class="">
-                  <table id="ufo-table" class="table table-striped">
+                  <table id="food-table" class="table table-striped">
                     <thead>
                       <tr>
                         <th class="table-head">Food</th>
@@ -69,8 +77,12 @@
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
 
-    <script src="static/js/data.js"></script>
-    <script src="static/js/app.js"></script>
+    <script src="../static/js/data.js"></script> -->
+    <script src="../static/js/app.js"></script> -->
+    
+  </body>
+    <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+    <!-- <script src="{{ url_for('static', filename='js/data.js') }}"></script> -->
 </body>
 
 </html>

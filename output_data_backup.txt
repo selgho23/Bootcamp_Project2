@@ -1,4 +1,4 @@
-var data = [
+[
     {
         "food": "steak",
         "paired_wine": [
@@ -238,3 +238,5 @@ var data = [
         "pairing_text": ""
     }
 ]
+?
+?
