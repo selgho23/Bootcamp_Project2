@@ -1,0 +1,22 @@
+#jumbotron {
+  width: 80%;
+  min-width: 760px;
+  padding-top: 0;
+  margin: 0 auto; 
+}
+
+
+h1 {
+  color: blue;
+  font-family: verdana;
+  font-size: 300%;
+}
+#table-area th {
+    text-align: center;
+  }
+  
+  #table-area th:first-child,
+  #table-area th:nth-child(2),
+  #table-area th:nth-child(6) {
+    min-width: 70px;
+  }

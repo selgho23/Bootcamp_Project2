@@ -11,8 +11,8 @@ data.forEach(function (winedata){
   var row = tbody.append("tr");
   Object.entries(winedata).forEach(function([key,value]){
      console.log(key,value);
-     var cell = row.append("td");
-//     cell.text(value);
+    //  var cell = row.append("td");
+    //  cell.text(value);
 
   });
 });
@@ -44,6 +44,13 @@ console.log(filteredData);
 
 //Display the filtered data by removing the old table
 tbody.text("")
+var row = tbody.append("tr");
+var cell = row.append("td");
+cell.text("Food");
+var cell = row.append("td");
+cell.text("Paired Wine");
+var cell = row.append("td");
+cell.text("Pairing Text");
 filteredData.forEach(function (winedata){
   console.log(winedata)
   var row = tbody.append("tr");
