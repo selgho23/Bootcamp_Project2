@@ -1,0 +1,78 @@
+#jumbotron {
+  width: 80%;
+  min-width: 760px;
+  padding-top: 0;
+  margin: 0 auto; 
+}
+
+
+
+
+/* #table-area tr td:first-child {
+  font-size: 1.8em;
+  font-weight: bold;
+  background: #050505;
+}
+
+#table-area tr td:last-child {
+  margin-bottom: 20px;
+} */
+
+/* #table-area tr td:last-child::after {
+  display: block;
+  width: 20%;
+  height: 1px;
+  margin-top: 20px;
+  content: " ";
+  background: rgb(8, 8, 8);
+} */
+/* 
+#table-area td {
+  font-size: 1.25em;
+}
+
+#table-area tbody td {
+  display: block;
+  text-align: center;
+} */
+
+.filters .panel-body {
+  padding: 10;
+}
+
+.filters {
+  margin-top: 10px;
+}
+
+
+td { background-color: floralwhite; }
+/* td.ColColor { background-color: blue; } */
+
+.jumbotron {
+  background-color:floralwhite;
+  width: 90%;
+  
+}
+
+body {
+  background-color: lavenderblush
+}
+
+.container {
+  position: relative;
+ 
+}
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  /* background-color: black; */
+  color: white;
+  /* font-family: 'Brush Script MT', cursive;  */
+  /* font-size:100% */
+  
+
+}
+
+
+
