@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Calligraffitti" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
@@ -35,8 +35,8 @@
             </div>
         </nav>
     </div>
-    <div class="wrapper" id="diet-allergy-cuisine">
-        <h1><b>Create the Perfect Meal</b></h1>
+    <div class="wrapper" id="recipe-selection-criteria">
+        <h1><b>Customize Your Meal</b></h1>
         <h4><b>Pick general food preferences</b></h4>
         <div class="row margin-top-30">
             <div class="col-md-4">
@@ -67,7 +67,7 @@
                                     </ul>
                                 </div>
                                 {% if notification %}
-                                <button id="first-btn" type="submit" class="btn btn-default">{{ notification }}</button>
+                                <button id="first-btn" type="submit" class="btn btn-success">{{ notification }}</button>
                                 {% else %}
                                 <button id="first-btn" type="submit" class="btn btn-default">Submit</button>
                                 {% endif %}
@@ -92,7 +92,7 @@
         </div>
         <h4><b>Choose one or more of the following search options.
                 Once you've made your selections, click</b>
-            <a role="button" class="btn btn-link" href="http://localhost:5000/results">
+            <a href="http://localhost:5000/results" role="button" class="btn btn-link" target="_blank">
                 <h3>Generate</h3><a>
         </h4>
         <div class="row margin-top-30">
@@ -127,7 +127,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button id="first-btn" type="submit" class="btn btn-default">Submit</button>
+                                <button onclick="changeMacros()" id="macros-btn" type="submit"
+                                    class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -149,7 +150,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button id="first-btn" type="submit" class="btn btn-default">Submit</button>
+                                <button onclick="changeIngreds() " id="ingredients-btn" type="submit"
+                                    class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -171,7 +173,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button id="first-btn" type="submit" class="btn btn-default">Submit</button>
+                                <button onclick="changeDescr()" id="description-btn" type="submit"
+                                    class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -179,8 +182,19 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="../static/js/app.js"></script>
+    <script>
+        function changeButton(button) {
+            button.style.background = '#5cb85c';
+            button.style.color = "white";
+            button.innerHTML = "Success!";
+        }
+        function changeMacros() { changeButton(document.getElementById("macros-btn")); }
+        function changeIngreds() { changeButton(document.getElementById("ingredients-btn")); }
+        function changeDescr() { changeButton(document.getElementById("description-btn")); }
+    </script>
 
 </body>
 

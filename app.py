@@ -2,6 +2,8 @@ from flask import Flask, flash, render_template, request, jsonify, redirect, url
 from flask_session import Session
 from config import apiKey
 import requests
+import json 
+from recipe_info import get_recipe_info
 
 app = Flask(__name__)
 SESSION_TYPE = 'filesystem'
@@ -37,7 +39,7 @@ def general():
 
     session['params1'] = params
 
-    notification = "Proceed!"
+    notification = "Scroll Down"
     return render_template('recipe.html', notification=notification)
 
 @app.route('/calories-macros', methods = ['POST', 'GET'])
@@ -83,7 +85,7 @@ def foodSearch3():
     return ('', 204)
 
 
-@app.route('/results', methods = ['POST', 'GET'])
+@app.route('/results')
 def results():
 
     full_params = {}
@@ -94,7 +96,11 @@ def results():
                     full_params[nested_key] = nested_value
 
     session.clear()
-    return jsonify(full_params)
+
+    recipe_info_dict = get_recipe_info(full_params)
+    
+    return render_template("results.html", recipe_result=recipe_info_dict)
+    # return jsonify(recipe_info_dict)
 
 if __name__ == '__main__':
    app.run(debug = True)
