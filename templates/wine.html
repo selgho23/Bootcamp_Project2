@@ -2,42 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Project 2 Test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FOOD AND WINE!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" type="static/css" href="mystyles.css" media="screen" /> -->
+    <!-- <link rel="stylesheet" href="/style.css"> --> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
-<body>
-    <div class="header">
-        <nav class="navbar navbar-default justify-content-end">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">
-                        <img class="logo" src="../static/images/logo.png" width=50 height=40>
-                    </a>
-                    All Things Food
-                </div>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="http://localhost:5000/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:5000/recipe-page">Recipes</a>
-                    </li>
-                    <li class="nav-item"  id="active">
-                        <a class="nav-link" href="http://localhost:5000/wine-page">Wine Pairings</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-    <script type="text/javascript" src="../static/js/app.js"></script>
+<style>
+    html,
+    body,
+    h1,
+    h3,
+    h4,
+    h5,
+    h6 {
+        /* font-family: "Comic Sans MS", cursive, sans-serif; */
+        /* font-family: cursive, sans-serif; */
+        /* font-family: Gill Sans Extrabold, sans-serif; */
+        /* font-family: 'Brush Script MT', cursive; */
+        font-family: 'Papyrus', fantasy;
+    }
 
+    h2 {
+        font-family: 'Brush Script MT', cursive;
+        font-size: 280%
+    }
+</style>
+
+<body
+    style="background-image: url('https://raw.githubusercontent.com/selgho23/Bootcamp_Project2/khushboo_branch/static/shutterstock_presentation.jpg')">
+
+    <div class="dropdown">
+        <a class="btn btn-default" role="button" style="background: gray" style="color: black"
+            href="http://127.0.0.1:5000/">Back to Home Page</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron" style="text-align: center">
+            <h1>Gastrónoma</h1>
+            <p>Enjoy food and wine!!</p>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h2>"If food is the body of good living, wine is its soul-
+                Clifton Fadiman"</h2>
+            <div id="plot"></div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row margin-top-50">
+            <div class="col-md-3">
+                <aside class="filters">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Filter Search</div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group">
+                                    <ul class="list-group" id="filters">
+                                        <li class="filter list-group-item">
+                                            <label for="food">Enter your food preference</label>
+                                            <input class="form-control" id="foodtype" type="text" placeholder="pasta">
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button id="filter-btn" type="submit" class="btn btn-default">Find wine pair</button>
+                                <button id="food_trivia" type="submit" class="btn btn-default">Food Trivia of the
+                                    Day</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-8 sidebar">
+
+                <div class="col-md-12" width: 1000px;>
+                    <div id="table-area" class="">
+                        <table id="food-table" class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <!-- <th class="table-head">Food</th>
+                        <th class="table-head">paired wine</th>
+                        <th class="table-head">pairing text</th> -->
+                                    <!-- <th class="table-head">product matches</th> -->
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+
+            <script src="../static/js/data.js"></script> -->
+            <script src="../static/js/wine.js"></script> -->
+
+
+</body>
+<!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/data.js') }}"></script> -->
 </body>
 
 </html>

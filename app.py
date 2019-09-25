@@ -102,5 +102,11 @@ def results():
     return render_template("results.html", recipe_result=recipe_info_dict)
     # return jsonify(recipe_info_dict)
 
+@app.route("/trivia")
+def jokes():
+    joke_response = requests.get(f"https://api.spoonacular.com/food/trivia/random", params={"apiKey" : apiKey})
+    joke_json = joke_response.json()
+    return jsonify(joke_json)
+
 if __name__ == '__main__':
    app.run(debug = True)

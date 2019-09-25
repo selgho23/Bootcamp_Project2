@@ -1,0 +1,25 @@
+.filters .panel-body {
+    padding: 10;
+  }
+  
+.filters {
+    margin-top: 10px;
+}
+  
+  
+td { background-color: floralwhite; }
+/* td.ColColor { background-color: blue; } */
+  
+.jumbotron {
+    background-color:floralwhite;
+    width: 90%;
+    
+}
+
+#jumbotron {
+    width: 80%;
+    min-width: 760px;
+    padding-top: 0;
+    margin: 0 auto; 
+}
+  

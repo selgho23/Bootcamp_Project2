@@ -84,7 +84,7 @@ def random_num_gen(array):
     random_idx = np.random.randint(0, 101)
     while 1:
         if random_idx in array:
-            random_idx = np.random.randint(1, 100+1)
+            random_idx = np.random.randint(0, 100)
         else:
             array.append(random_idx)
             break
