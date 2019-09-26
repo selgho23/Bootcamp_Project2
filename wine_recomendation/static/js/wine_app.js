@@ -88,9 +88,121 @@ filterbtn.on("click", function () {
 
 });
 
+// function buildPlot(data) {
+// var ratings = data.map(d => d.avg_rating);
+// var prices = data.map(d => d.price);
+// var titles = data.map(d => d.title);
+// console.log(titles);
+// var trace1 = {
+//   type: "scatter",
+//   mode: "lines",
+//   name: name,
+//   x: titles,
+//   y: prices,
+//   line: {
+//     color: "#17BECF"
+//   }
 
-// function init() {
-//     // Grab a reference to the dropdown select element
-//     var selector = d3.select("#more_info");
+// };
+
+
+// // Candlestick Trace
+// var trace2 = {
+//   type: "candlestick",
+//   x: titles,
+//   y: ratings
+// };
+
+// var data = [trace1, trace2];
+
+//     var layout = {
+//       title: `price and rating`,
+//       // xaxis: {
+//       //   // range: [startDate, endDate],
+//       //   type: "date"
+//       // },
+//       // yaxis: {
+//       //   autorange: true,
+//       //   type: "linear"
+//       // }
+//     };
+
+//     Plotly.newPlot("plot", data, layout);
+  
+// }
+// buildPlot(data);
+// // Add event listener for submit button
+// // d3.select("#more_info").on("click",buildPlot );
+
+// Submit Button handler
+function handleSubmit() {
+  wine_table.html("");
+  // Prevent the page from refreshing
+  d3.event.preventDefault();
+  // clear the input value
+  d3.select("#more_info").node().value = "";
+// Build the plot with the new stock
+  buildPlot(data);
+}
+
+function buildPlot(data) {
+var ratings = data.map(d => d.avg_rating);
+var prices = data.map(d => d.price);
+var titles = data.map(d => d.title);
+console.log(titles);
+
+var trace1 = {
+  x: prices,
+  y: titles,
+  type: 'bar',
+  orientation: 'h',
+  // text: prices,
+  textposition: 'auto',
+  marker: {
+      color: "#EE6363"
+  },
+  name: "prices"
+};
+var trace2 = {
+  x:ratings ,
+  y: titles,
+  type: 'bar',
+  orientation: 'h',
+  //text: ratings,
+  textposition: 'auto',
+  marker: {
+      color: "#79CDCD"
+  },
+  name: "Ratings"
+};
+var data = [trace2, trace1,];
+
+var layout = {
+  paper_bgcolor: "#FDF2E9",
+  plot_bgcolor: "#FDF2E9",
+  width: 'auto',
+  height: 600,
+  margin: {
+      l: 100,
+      r: 30,
+      t: 10,
+      b: 50
+  
+  },
+ 
+  yaxis: {
+      ticklen: 6,
+  },
+  xaxis: {
+      title: { text: 'Name of the wines' }
+  }
+
+ 
+};
+
+Plotly.newPlot("plot", data, layout)
+}
+//  buildPlot(data);
+d3.select("#more_info").on("click",handleSubmit);
 
 
