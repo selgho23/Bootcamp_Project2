@@ -74,8 +74,14 @@
                           </ul>
                         </div>
                         <button id="filter-btn" type="submit" class="btn btn-default">Find wine pair</button>
-                        <button id="food_trivia" type="submit" class="btn btn-default">Food Trivia of the Day</button>
+                        <!-- <button id="food_trivia" type="submit" class="btn btn-default">Food Trivia of the Day</button> -->
+                        <div id="showme" style="display:none;"></div>
+                        <div id="loadingGif" style="display:none"><img src="/static/tenor.gif"></div>
+                        <form action="#" method="POST" id="hello" onsubmit="return false;">
                         
+                          
+                        <input class="btn btn-default" type="submit" name="submit" id="food_trivia" value="Food Trivia of the Day" width="54" height="20" border="0" tabindex="5" onclick="showDiv()">
+                        </form>
                       </form>
                     </div>
                   </div>

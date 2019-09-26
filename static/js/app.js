@@ -82,9 +82,32 @@ function init() {
     var cell = row.append("td");
     cell.text(triviaData.text);
 
+  
+   
+
     });
     });
 }
 init();
+
+
+function showDiv() {
+  tbody.text("");
+  document.getElementById('food_trivia').style.display = "block";
+  document.getElementById('loadingGif').style.display = "block";
+  setTimeout(function() {
+  document.getElementById('loadingGif').style.display = "none";
+  document.getElementById('showme').style.display = "block";
+  },6000);
+   
+}
+
+
+// function showDiv() {
+// document.getElementById('food_trivia').style.display = "block";
+// }
+
+
+
 
 

@@ -54,3 +54,16 @@ td { background-color: floralwhite; }
   
 }
 
+#loadingGif{
+  position: absolute;
+  /* bottom: 5%; */
+  top:40%;
+  /* bottom:10%; */
+  left: 200%; 
+  width: 60px;
+  margin: -50px 0px 0px -50px;
+  /* background-position:center; */
+  }
+
+
+

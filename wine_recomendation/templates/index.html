@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+​
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wine Recommendations!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">  
+    <!-- <link rel="stylesheet" type="static/css" href="mystyles.css" media="screen" /> -->
+    <!-- <link rel="stylesheet" href="/style.css"> --> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+​
+<style>
+    html, body, h1,h3, h4, h5, h6 {
+      /* font-family: "Comic Sans MS", cursive, sans-serif; */
+      /* font-family: cursive, sans-serif; */
+      /* font-family: Gill Sans Extrabold, sans-serif; */
+      /* font-family: 'Brush Script MT', cursive; */
+       font-family: 'Papyrus',fantasy; 
+​
+    }
+
+    h2 {
+       font-family: 'Brush Script MT', cursive; 
+       font-size:280%
+    }
+
+    #food-table {
+      background: white;
+    }
+</style>
+<body background="/static/shutterstock_1249713091.jpg">
+    
+  <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+     <div class="container">
+        <div class="jumbotron"
+        style="text-align: center" >
+            <h1>Wine Recommendations</h1>
+            <p></p>
+            
+        </div>
+      </div>
+​
+        <div class="row">
+            <div class="col-md-12" style="text-align:center">
+                <div id="plot"></div>
+                
+            </div>
+        </div>
+        <div class="container"  >
+            <div class="row margin-top-50">
+              <div class="col-md-3">
+                <aside class="filters" >
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Filter Search</div>
+                    <div class="panel-body">
+                      <form>
+                        <div class="form-group">
+                          <ul class="list-group" id="filters">
+                            <li class="filter list-group-item">
+                              <label for="food">Enter your wine preference</label>
+                              <input class="form-control" id="winetype" type="text" placeholder="Merlot">
+                              
+                            </li>
+                          </ul>
+                        </div>
+                        <button id="filter-btn" type="submit" class="btn btn-default">Find your wine</button>
+                        <br>
+
+                        <!-- <button id="more_info" type="submit" class="btn btn-default">Get more info</button> -->
+                      </form>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+              <div class = "col-md-8 sidebar">
+                
+              <div class="col-md-12" width: 500px; height: 50px;>
+                <div id="table-area" class="" >
+                  <table id="food-table" class="table table-striped">
+                    <thead>
+                      <!-- <tr> -->
+                      
+                       <!-- <th class="table-head">Food</th>
+                        <th class="table-head">paired wine</th>
+                        <th class="table-head">pairing text</th> -->
+                        <!-- <th class="table-head">product matches</th> -->
+                        
+                      <!-- </tr> -->
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+        
+        
+    </div>
+    
+    
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+<!-- ​    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/app.js"></script> -->
+
+    <script src="../static/js/wine2data.js"></script> -->
+    <script src="../static/js/wine_app.js"></script> -->
+​
+    
+  </body>
+    <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+    <!-- <script src="{{ url_for('static', filename='js/data.js') }}"></script> -->
+</body>
+​
+</html>
+
+
+
+
+
