@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FOOD AND WINE!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="static/css" href="mystyles.css" media="screen" /> -->
-    <!-- <link rel="stylesheet" href="/style.css"> --> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
@@ -21,10 +19,6 @@
     h4,
     h5,
     h6 {
-        /* font-family: "Comic Sans MS", cursive, sans-serif; */
-        /* font-family: cursive, sans-serif; */
-        /* font-family: Gill Sans Extrabold, sans-serif; */
-        /* font-family: 'Brush Script MT', cursive; */
         font-family: 'Papyrus', fantasy;
     }
 
@@ -32,18 +26,28 @@
         font-family: 'Brush Script MT', cursive;
         font-size: 280%
     }
+
+    .custom-button {
+        background: gray;
+        color: whitesmoke;
+        font-family: 'Papyrus', fantasy;
+        font-size: 15px;
+        border-radius: 20px;
+        padding: 5px;
+        margin: 10px;
+    }
 </style>
 
 <body
     style="background-image: url('https://raw.githubusercontent.com/selgho23/Bootcamp_Project2/khushboo_branch/static/shutterstock_presentation.jpg')">
 
-    <div class="dropdown">
-        <a class="btn btn-default" role="button" style="background: gray" style="color: black"
-            href="http://127.0.0.1:5000/">Back to Home Page</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+    <div class='navbar navbar default'>
+        <div class="dropdown">
+            <select class="selectpicker custom-button" id="choose-page" onchange="location = this.value">
+                <option>Stay on this page?</option>
+                <option value="http://127.0.0.1:5000/">Back to Home Page</option>
+                <option value="http://127.0.0.1:5000/wine-recommendation-page">Find Wine Recommendation</option>
+            </select>
         </div>
     </div>
     <div class="container">
@@ -74,15 +78,18 @@
                                     <ul class="list-group" id="filters">
                                         <li class="filter list-group-item">
                                             <label for="food">Enter your food preference</label>
-                                            <input class="form-control" id="foodtype" type="text" placeholder="pasta">
+                                            <input class="form-control" id="foodtype" type="text" placeholder="salmon">
 
                                         </li>
                                     </ul>
                                 </div>
                                 <button id="filter-btn" type="submit" class="btn btn-default">Find wine pair</button>
-                                <button id="food_trivia" type="submit" class="btn btn-default">Food Trivia of the
-                                    Day</button>
+                                <form action="#" method="POST" id="hello" onsubmit="return false;">
 
+                                    <input class="btn btn-default" type="submit" name="submit" id="food_trivia"
+                                        value="Food Trivia of the Day" width="54" height="20" border="0" tabindex="5"
+                                        onclick="showDiv()">
+                                </form>
                             </form>
                         </div>
                     </div>
@@ -95,16 +102,14 @@
                         <table id="food-table" class="table table-striped">
                             <thead>
                                 <tr>
-
-                                    <!-- <th class="table-head">Food</th>
-                        <th class="table-head">paired wine</th>
-                        <th class="table-head">pairing text</th> -->
-                                    <!-- <th class="table-head">product matches</th> -->
-
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
+                        <div id="showme" style="display:none;"></div>
+                        <div id="loadingGif" style="display:none"><img
+                                src="https://raw.githubusercontent.com/selgho23/Bootcamp_Project2/khushboo_branch/static/tenor.gif">
+                        </div>
                     </div>
                 </div>
 
@@ -120,8 +125,7 @@
 
 
 </body>
-<!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
-<!-- <script src="{{ url_for('static', filename='js/data.js') }}"></script> -->
+
 </body>
 
 </html>

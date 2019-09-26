@@ -1,5 +1,6 @@
-var myRecipe = JSON.parse(document.getElementById("myRecipe").dataset.recipe);
-console.log(myRecipe);
+var myRecipes = JSON.parse(document.getElementById("myRecipes").dataset.recipe);
+var recipe_images = myRecipes.map(d => d.image);
+console.log(recipe_images);
 
 function recipe_results_page(recipe) {
     quick_info_plot(recipe);
@@ -7,28 +8,46 @@ function recipe_results_page(recipe) {
     ingredients_list(recipe);
     instructions_list(recipe);
     recipe_summary(recipe);
+    title_image(recipe);
 }
 function quick_info_plot(recipe) {
     var nutrition = recipe['nutrients'];
-    var amount = nutrition.map(item => item.amount);
     var healthScore = recipe['healthScore'];
 
-    var quick_info = [{
-        cal: `${Math.round(amount[0])} Calories`,
-        fat: `${Math.round(amount[2])}g Total Fat`,
-        carb: `${Math.round(amount[4])}g Carbs`,
-        protein: `${Math.round(amount[7])}g Protein`,
-        hScore: `${Math.round(healthScore)}% Health Score`
-    }];
+    var titles = ['Calories', 'Fat', 'Carbohydrates', 'Protein'];
+    var quick_info_dict = { hScore: `${Math.round(healthScore)}% Health Score` }
+    nutrition.forEach(info => {
+        if (titles.includes(info.title)) {
+            switch (info.title) {
+                case 'Calories':
+                    quick_info_dict['cal'] = `${Math.round(info['amount'])} ${info['title']}`;
+                    break;
+                case 'Fat':
+                    quick_info_dict['fat'] = `${Math.round(info['amount'])}${info['unit']} ${info['title']}`;
+                    break;
+                case 'Carbohydrates':
+                    quick_info_dict['carb'] = `${Math.round(info['amount'])}${info['unit']} ${info['title']}`;
+                    break;
+                case 'Protein':
+                    quick_info_dict['protein'] = `${Math.round(info['amount'])}${info['unit']} ${info['title']}`;
+                    break;
+            }
+        }
+    });
+    var quick_info = [quick_info_dict];
+    var quick_info_table = d3.select("#quick-info").select("thead");
+    quick_info_table.html("");
 
-    d3.select("#quick-info").select("thead")
+    quick_info_table
         .selectAll("tr")
         .data(quick_info)
         .enter()
         .append("tr")
         .html(function (d) {
             return `<th>${d.cal}</th><th>${d.fat}</th><th>${d.carb}</th><th>${d.protein}</th><th>${d.hScore}</th>`
-        })
+        });
+
+    console.log(quick_info)
 }
 
 function nutrition_plot(recipe) {
@@ -89,8 +108,10 @@ function nutrition_plot(recipe) {
 
 function ingredients_list(recipe) {
     var ingredients = recipe['ingredients'];
+    var ingred_list = d3.select('#ingredients').select("ul");
+    ingred_list.html("");
 
-    d3.select('#ingredients').select("ul")
+    ingred_list
         .selectAll("li")
         .data(ingredients)
         .enter()
@@ -102,15 +123,20 @@ function ingredients_list(recipe) {
 
 function instructions_list(recipe) {
     var instructions = recipe['instructions'];
+    var instruct_list = d3.select('#instructions').select("ul");
+    instruct_list.html("");
 
-    d3.select('#instructions').select("ul")
+    instruct_list
         .selectAll("li")
         .data(instructions)
         .enter()
         .append("li")
+        .attr("type", "circle")
         .html(function (d) {
-            return `<em>${d}</em><b>`
+            return `<em>${d}</em>`
         })
+
+    // console.log(instructions)
 }
 
 function recipe_summary(recipe) {
@@ -124,4 +150,39 @@ function recipe_summary(recipe) {
         })
 }
 
-recipe_results_page(myRecipe)
+function title_image(recipe) {
+    var title = d3.select('#results-wrap').select("h1");
+    var image = d3.select('#recipe-image').select("img");
+
+    title.html("");
+    image.html("");
+
+    title.text(recipe.title);
+    image.attr("src", recipe.image);
+}
+function init() {
+    var selector = d3.select("#select-recipe");
+    // Use the list of titles to populate the select options
+    myRecipes.forEach((recipe) => {
+        selector
+            .append("option")
+            .text(recipe.title)
+            .property("value", recipe.image);
+    });
+
+    // Use the first recipe from the list to build the initial results page
+    // d3.select('#results-wrap').select("h1").text(myRecipes[0].title);
+    // d3.select('#recipe-image').append("img").attr("src", myRecipes[0].image)
+    recipe_results_page(myRecipes[0]);
+}
+
+function recipe_changed(newRecipeImage) {
+    var new_recipe_index = recipe_images.indexOf(String(newRecipeImage));
+    var new_recipe = myRecipes[new_recipe_index];
+    console.log(newRecipeImage);
+    console.log(new_recipe_index);
+
+    recipe_results_page(new_recipe);
+}
+
+init()

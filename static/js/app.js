@@ -1,62 +1,4 @@
-// var temp = d3.select("#spoonacular-equipment-vis-grid");
-// temp.append("div").html('<div style="float:left"><div class="spoonacular-equipment"><div class="spoonacular-image-wrapper"><img src="https://spoonacular.com/cdn/equipment_100x100/hand-mixer.png" title="hand mixer" alt="hand mixer"/></div><div class="spoonacular-name t12">hand mixer</div></div></div>')
-// temp.append("div").html('<div style="float:left"><div class="spoonacular-equipment"><div class="spoonacular-image-wrapper"><img src="https://spoonacular.com/cdn/equipment_100x100/potato-masher.jpg" title="potato masher" alt="potato masher"/></div><div class="spoonacular-name t10">potato masher</div></div></div>')
-
-// temp.append("div").html('<div class="spoonacular-equipment-list"><div style="float:left"><div class="spoonacular-image-wrapper" style="height:80px"><img src="https://spoonacular.com/cdn/equipment_100x100/hand-mixer.png" title="hand mixer" alt="hand mixer"/></div></div><div class="spoonacular-name">hand mixer</div><div style="clear:both"></div></div>')
-// temp.append("div").html('<div class="spoonacular-equipment-list"><div style="float:left"><div class="spoonacular-image-wrapper" style="height:80px"><img src="https://spoonacular.com/cdn/equipment_100x100/potato-masher.jpg" title="potato masher" alt="potato masher"/></div></div><div class="spoonacular-name">potato masher</div><div style="clear:both"></div></div>')
-
-// var button = d3.select("#spoonacularEquipmentView")
-
-// 'var display = d3.select("#spoonacular-equipment-vis");
-// d3.select(".spoonacular-ingredients-menu").selectAll("input").on("change", function () {
-//     var selection = this.value;
-//     display.html("")
-
-//     if (selection === "grid") {
-//         display.append("div").html('<div style="float:left"><div class="spoonacular-equipment">' +
-//             '<div class="spoonacular-image-wrapper">' +
-//             '<img src="https://spoonacular.com/cdn/equipment_100x100/hand-mixer.png"' +
-//             'title="hand mixer" alt="hand mixer"/></div><div class="spoonacular-name t12">' +
-//             'hand mixer</div></div></div>')
-//         display.append("div").html('<div style="float:left"><div class="spoonacular-equipment"><div class="spoonacular-image-wrapper"><img src="https://spoonacular.com/cdn/equipment_100x100/potato-masher.jpg" title="potato masher" alt="potato masher"/></div><div class="spoonacular-name t10">potato masher</div></div></div>')
-//     }
-//     else {
-//         display.append("div").html('<div class="spoonacular-equipment-list"><div style="float:left"><div class="spoonacular-image-wrapper" style="height:80px"><img src="https://spoonacular.com/cdn/equipment_100x100/hand-mixer.png" title="hand mixer" alt="hand mixer"/></div></div><div class="spoonacular-name">hand mixer</div><div style="clear:both"></div></div>')
-//         display.append("div").html('<div class="spoonacular-equipment-list"><div style="float:left"><div class="spoonacular-image-wrapper" style="height:80px"><img src="https://spoonacular.com/cdn/equipment_100x100/potato-masher.jpg" title="potato masher" alt="potato masher"/></div></div><div class="spoonacular-name">potato masher</div><div style="clear:both"></div></div>')
-//     }
-// })'
-
-
-// var button = d3.select("#first-btn");
-// var recipe = d3.select("#meal-btn");
-// var params = ["hello"];
-// button.on("click", function () {
-//     d3.event.preventDefault();
-
-//     var inputs = d3.selectAll(".form-control");
-//     var inputData = inputs.data("value")._groups[0];
-//     var inputValues = inputData.map(inD => inD.value);
-//     while (inputValues.length > 3) { inputValues.pop() };
-//     inputValues.forEach(element => {
-//         params.push(element)
-//     });
-
-//     recipe.on("click", function () {
-//         d3.event.preventDefault();
-
-//         var inputs = d3.selectAll(".form-control");
-//         var inputData = inputs.data("value")._groups[0];
-//         var inputValues = inputData.map(inD => inD.value);
-//         while (inputValues.length > 3) { inputValues.pop() };
-//         inputValues.forEach(element => {
-//             params.push(element)
-//         });
-//         console.log(params)
-//     });
-
-//     console.log(params)
-// });
-
+// List of supported diets
 var diets = ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian',
   'Ovo-Vegetarian', 'Vegan', 'Pescetarian', 'Paleo', 'Primal',
   'Whole30'];
@@ -70,6 +12,7 @@ for (var i = 0; i < diets.length; i = i + 2) {
   diet_dicts.push(dictionary);
 };
 
+// Pupulate diets list 
 d3.select("#diet-list").select("tbody")
   .selectAll("tr")
   .data(diet_dicts)
@@ -79,11 +22,12 @@ d3.select("#diet-list").select("tbody")
     return `<td>${d.col1}</td><td>${d.col2}</td>`
   });
 
+// List of supported cuisines
 var cuisines = ["African", "American", "British", "Cajun", "Caribbean",
   "Chinese", "Eastern European", "European", "French", "German",
-  "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish",
-  "Korean", "Latin American", "Mediterranean", "Mexican",
-  "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese", ""];
+  "Greek", "Indian", "Irish", "Italian", "Japanese", "Korean", 
+  "Latin American", "Mediterranean", "Mexican",
+  "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese", "", ""];
 
 var cuisine_dicts = [];
 for (var i = 0; i < cuisines.length; i = i + 3) {
@@ -95,6 +39,7 @@ for (var i = 0; i < cuisines.length; i = i + 3) {
   cuisine_dicts.push(dictionary);
 };
 
+// Populate cuisines list
 d3.select("#cuisine-list").select("tbody")
   .selectAll("tr")
   .data(cuisine_dicts)

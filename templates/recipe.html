@@ -10,6 +10,24 @@
     <link href="https://fonts.googleapis.com/css?family=Calligraffitti" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
+<style>
+    #myProgress {
+        width: 100%;
+        background-color: #ddd;
+        border: 10px solid 119425;
+        border-radius: 10px;
+    }
+
+    #myBar {
+        width: 0%;
+        height: 30px;
+        background-color: #5cb85c;
+        border: 10px solid 119425;
+        border-radius: 10px;
+        color: whitesmoke;
+        text-align: center;
+    }
+</style>
 
 <body>
     <div class="header">
@@ -19,17 +37,21 @@
                     <a class="navbar-brand">
                         <img class="logo" src="../static/images/logo.png" width=50 height=40>
                     </a>
-                    All Things Food
+                    gastrónoma
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item ">
                         <a class="nav-link" href="http://localhost:5000/">Home</a>
                     </li>
                     <li class="nav-item" id="active">
-                        <a class="nav-link" href="http://localhost:5000/recipe-page">Recipes</a>
+                        <a class="nav-link" href="http://localhost:5000/recipe-page">Find Recipes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:5000/wine-page">Wine Pairings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000/wine-recommendation-page">Wine
+                            Recommendations</a>
                     </li>
                 </ul>
             </div>
@@ -42,10 +64,11 @@
             <div class="col-md-4">
                 <aside class="constraints">
                     <div class="panel panel-default">
-                        <div class="panel-heading" id="general">Don't have a preference? Just leave the text boxes empty,
-                            click submit, and scrolldown.</div>
+                        <div class="panel-heading" id="general">Don't have a preference? Just leave the text boxes
+                            empty,
+                            and scroll down.</div>
                         <div class="panel-body">
-                            <form action="http://localhost:5000/general-preferences" method="POST">
+                            <form action="http://localhost:5000/selection" method="POST">
                                 <div class="form-group">
                                     <ul class="list-group" id="constraints">
                                         <li class="constraint list-group-item">
@@ -65,12 +88,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                {% if notification %}
-                                <button id="first-btn" type="submit" class="btn btn-success">{{ notification }}</button>
-                                {% else %}
-                                <button id="first-btn" type="submit" class="btn btn-default">Submit</button>
-                                {% endif %}
-
+                                <button onclick="changeGeneral()" id="general-btn" type="submit" name="btn-identifier"
+                                    value="general-btn" class="btn btn-default">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -91,9 +110,12 @@
         </div>
         <h4><b>Choose one or more of the following search options.
                 Once you've made your selections, click</b>
-            <a href="http://localhost:5000/results" role="button" class="btn btn-link" target="_blank">
+            <a href="http://localhost:5000/results" role="button" class="btn btn-link" onclick="move()">
                 <h3>Generate</h3><a>
         </h4>
+        <div id="myProgress">
+            <div id="myBar"></div>
+        </div>
         <div class="row margin-top-30">
             <div class="col-md-4">
                 <aside class="constraints">
@@ -101,7 +123,7 @@
                         <div class="panel-heading">Keeping track of calories and macros?
                             <br> This is the box for you.</div>
                         <div class="panel-body">
-                            <form action="http://localhost:5000/calories-macros" method="POST">
+                            <form action="http://localhost:5000/selection" method="POST">
                                 <div class="form-group" id="constraints">
                                     <ul class="list-group">
                                         <li class="constraint list-group-item">
@@ -126,8 +148,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeMacros()" id="macros-btn" type="submit"
-                                    class="btn btn-default selection-btn">Submit</button>
+                                <button onclick="changeMacros()" id="macros-btn" type="submit" name="btn-identifier"
+                                    value="macros-btn" class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -139,7 +161,7 @@
                         <div class="panel-heading">Don't feel like shopping?
                             <br>Add a list of ingredients and we'll find you a recipe.</div>
                         <div class="panel-body">
-                            <form action="http://localhost:5000/ingredients" method="POST">
+                            <form action="http://localhost:5000/selection" method="POST">
                                 <div class="form-group">
                                     <ul class="list-group" id="constraints">
                                         <li class="constraint list-group-item">
@@ -150,6 +172,7 @@
                                     </ul>
                                 </div>
                                 <button onclick="changeIngreds() " id="ingredients-btn" type="submit"
+                                    name="btn-identifier" value="ingredients-btn"
                                     class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
@@ -162,7 +185,7 @@
                         <div class="panel-heading">Craving something specific?
                             <br>Describe your dish and get a recipe to match.</div>
                         <div class="panel-body">
-                            <form action="http://localhost:5000/description" method="POST">
+                            <form action="http://localhost:5000/selection" method="POST">
                                 <div class="form-group">
                                     <ul class="list-group" id="constraints">
                                         <li class="constraint list-group-item">
@@ -172,8 +195,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeDescr()" id="description-btn" type="submit"
-                                    class="btn btn-default selection-btn">Submit</button>
+                                <button onclick="changeDescr()" id="description-btn" type="submit" name="btn-identifier"
+                                    value="description-btn" class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -193,6 +216,28 @@
         function changeMacros() { changeButton(document.getElementById("macros-btn")); }
         function changeIngreds() { changeButton(document.getElementById("ingredients-btn")); }
         function changeDescr() { changeButton(document.getElementById("description-btn")); }
+        function changeGeneral() {
+            var button = document.getElementById("general-btn");
+            button.style.background = '#5cb85c';
+            button.style.color = "white";
+            button.innerHTML = "Scroll Down";
+        }
+    </script>
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 1;
+            var id = setInterval(frame, 140);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1 + '%';
+                }
+            }
+        }
     </script>
 
 </body>

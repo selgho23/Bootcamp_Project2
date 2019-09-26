@@ -8,13 +8,54 @@
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
+<style>
+    #choose-page {
+        background: #8a8282;
+        color: whitesmoke;
+        font-family: 'Caveat';
+        font-size: 18px;
+        border-radius: 20px;
+        padding: 5px;
+    }
+
+    .margin-top-15 {
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+
+    #select-recipe {
+        background: #854442;
+        border: 5px solid 119425;
+        border-radius: 10px;
+        color: whitesmoke;
+        font-family: 'Caveat';
+    }
+</style>
+
 <body>
-    <div id="myRecipe" data-recipe='{{ recipe_result | tojson }}'></div>
+    <div id="myRecipes" data-recipe='{{ recipe_result | tojson }}'></div>
+    <div class='header'>
+        <div class='navbar navbar default' style="background: #FDF2E9">
+            <div class="dropdown">
+                <select class="selectpicker custom-button" id="choose-page" onchange="location = this.value">
+                    <option>Stay on this page?</option>
+                    <option value="http://127.0.0.1:5000/recipe-page">Find Other Recipes</option>
+                    <option value="http://127.0.0.1:5000/wine-page">Wine Pairing</option>
+                    <option value="http://127.0.0.1:5000/wine-recommendation-page">Wine Recommendation</option>
+                </select>
+            </div>
+            <div class="dropdown">
+                <select class="selectpicker show-tick custom-button" id="select-recipe"
+                    onchange="recipe_changed(this.value)">
+                </select>
+            </div>
+        </div>
+    </div>
     <div class='wrapper' id='results-wrap'>
-        <h1>{{recipe_result.title}}</h1>
-        <div class='row margin-top-30'>
-            <div class="col-md-6">
-                <img src="{{ recipe_result.image }}" alt="Card image">
+        <h1></h1>
+        <div class='row margin-top-15'>
+            <div class="col-md-6" id="recipe-image">
+                <img>
                 <div class="card">
                     <div class="card-body" id="recipe_summary">
                         <p class="card-text"></p>
@@ -26,10 +67,9 @@
                 <table class="table table-bordered" id="quick-info">
                     <thead></thead>
                 </table>
-                <div id=nutrition-plot></div>
+                <div id="nutrition-plot"></div>
             </div>
         </div>
-        <br><br>
         <h2>Ingredients/Instructions</h2>
         <div class='row margin-top-30' id="ingredients-instructions">
             <div class="col-md-4" id="ingredients">
@@ -38,8 +78,7 @@
             </div>
             <div class="col-md-6" id="instructions">
                 <h3>Instructions</h3>
-                <ul class="list-unstyled">
-                </ul>
+                <ul></ul>
             </div>
         </div>
     </div>

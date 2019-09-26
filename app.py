@@ -2,7 +2,7 @@ from flask import Flask, flash, render_template, request, jsonify, redirect, url
 from flask_session import Session
 from config import apiKey
 import requests
-import json 
+import json
 from recipe_info import get_recipe_info
 
 app = Flask(__name__)
@@ -10,103 +10,106 @@ SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 Session(app)
 
+def grab_user_input(input):
+    params = {}
+    for key, value in input.items():
+        if key == "excludeIngredients":
+            params[key] = value.strip().replace(", ", ",")
+        elif key == "includeIngredients":
+            params[key] = value.strip().replace(", ", ",")
+        else:
+            params[key] = value
+    return params
+
 @app.route('/')
 def home():
-   session.clear()
-   return render_template('index.html')
+    """Renders the home page."""
+    return render_template('index.html')
+
 
 @app.route('/recipe-page')
 def recipe():
+    """Renders the recipe search page."""
     return render_template("recipe.html")
+
 
 @app.route('/wine-page')
 def wine():
+    """Renders the wine pairing page."""
     return render_template("wine.html")
 
-@app.route('/general-preferences',methods = ['POST', 'GET'])
-def general():
+@app.route('/wine-recommendation-page')
+def wineRecommendation():
+    """Renders the wine recommendations page."""
+    return render_template("wine_recommendation.html")
+
+@app.route('/error')
+def error():
+    """Renders the error page, informing user that no results 
+    for recipe search were found."""
+    return render_template("error.html")
+
+
+@app.route('/selection', methods=['POST', 'GET'])
+def selection():
+    """Catches all form inputs and stores values in a session object."""
 
     user_input = request.form
-    params = {
-        "apiKey": apiKey,
-        "number": 1
-    }
-    for key, value in user_input.items():
-        if key == "excludeIngredients":
-            params[key] = value.strip().replace(", ", ",")
-        else:
-            params[key] = value
+    if user_input['btn-identifier'] == 'general-btn':
+        session['general'] = grab_user_input(user_input)
+    elif user_input['btn-identifier'] == 'macros-btn':
+        session['macros'] = grab_user_input(user_input)
+    elif user_input['btn-identifier'] == 'ingredients-btn':
+        session['ingredients'] = grab_user_input(user_input)
+    elif user_input['btn-identifier'] == 'description-btn':
+        session['description'] = grab_user_input(user_input)
 
-    session['params1'] = params
-
-    notification = "Scroll Down"
-    return render_template('recipe.html', notification=notification)
-
-@app.route('/calories-macros', methods = ['POST', 'GET'])
-def foodSearch1():
-
-    user_input = request.form
-    params = {}
-
-    for key, value in user_input.items():
-        params[key] = value
-
-    session['params2'] = params
-
-    return ('', 204)
-
-@app.route('/ingredients', methods = ['POST', 'GET'])
-def foodSearch2():
-
-    user_input = request.form
-    params = {}
-
-    for key, value in user_input.items():
-        if key == "includeIngredients":
-            params[key] = value.strip().replace(", ", ",")
-        else:
-            params[key] = value
-
-    session['params3'] = params
-
-    return ('', 204)
-
-@app.route('/description', methods = ['POST', 'GET'])
-def foodSearch3():
-
-    user_input = request.form
-    params = {}
-
-    for key, value in user_input.items():
-        params[key] = value
-
-    session['params4'] = params
-
-    return ('', 204)
-
+    return redirect('', 204)
 
 @app.route('/results')
 def results():
+    """Process user's request and then clear session."""
 
-    full_params = {}
+    full_params = {
+        "apiKey": apiKey,
+        "number": 10
+    }
     for key, value in session.items():
-        if key!="_permanent" and value:
+        if (key!="_permanent") and value:
             for nested_key, nested_value in value.items():
                 if nested_value:
                     full_params[nested_key] = nested_value
 
     session.clear()
 
-    recipe_info_dict = get_recipe_info(full_params)
-    
-    return render_template("results.html", recipe_result=recipe_info_dict)
-    # return jsonify(recipe_info_dict)
+    try:
+        del full_params['btn-identifier']
+    except KeyError:
+        pass
+
+    recipes_info = get_recipe_info(full_params)
+    if recipes_info == []:
+        return redirect(url_for('error'))
+    else:
+        return render_template("results.html", recipe_result=recipes_info)
+
 
 @app.route("/trivia")
 def jokes():
-    joke_response = requests.get(f"https://api.spoonacular.com/food/trivia/random", params={"apiKey" : apiKey})
+    """Returns some food trivia upon request."""
+
+    joke_response = requests.get(
+        f"https://api.spoonacular.com/food/trivia/random", params={"apiKey": apiKey})
     joke_json = joke_response.json()
     return jsonify(joke_json)
 
+@app.route("/wine_recommendation_info")
+def info():
+    """Queries spoonacular API for wine recommendations."""
+    
+    info_response = requests.get(f"https://api.spoonacular.com/food/wine/recommendation?wine='merlot'&number=5", params={"apiKey" : apiKey})
+    info_json = info_response.json()
+    return jsonify(info_json)
+
 if __name__ == '__main__':
-   app.run(debug = True)
+    app.run(debug=True)
