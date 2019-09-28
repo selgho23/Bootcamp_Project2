@@ -1,5 +1,5 @@
 # Bootcamp_Project2
-##FOOD WINE AND PREP!
+#FOOD WINE AND PREP!
 
 
 The aim of this project was to create a multiple webpage application supported by javascript,HTML,CSS,d3 and plotly.
