@@ -5,11 +5,17 @@ import requests
 import json
 from recipe_info import get_recipe_info
 
+#######################
+##### FLASK SETUP #####
+#######################
 app = Flask(__name__)
 SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 Session(app)
 
+#############################################
+#### HELPER FUNCTION FOR SELECTION ROUTE ####
+#############################################
 def grab_user_input(input):
     params = {}
     for key, value in input.items():
@@ -21,6 +27,9 @@ def grab_user_input(input):
             params[key] = value
     return params
 
+###################################
+#### ROUTES TO RENDER WEBPAGES ####
+###################################
 @app.route('/')
 def home():
     """Renders the home page."""
@@ -49,7 +58,9 @@ def error():
     for recipe search were found."""
     return render_template("error.html")
 
-
+###########################
+#### FUNCTIONAL ROUTES ####
+###########################
 @app.route('/selection', methods=['POST', 'GET'])
 def selection():
     """Catches all form inputs and stores values in a session object."""
@@ -74,6 +85,8 @@ def results():
         "apiKey": apiKey,
         "number": 10
     }
+
+    # Filter meaningful data from session and add it to full_params
     for key, value in session.items():
         if (key!="_permanent") and value:
             for nested_key, nested_value in value.items():
@@ -82,12 +95,16 @@ def results():
 
     session.clear()
 
+    # Remove 'btn-identifier' from full_params
     try:
         del full_params['btn-identifier']
     except KeyError:
         pass
 
+    # Get recipes using user's selection criteria
     recipes_info = get_recipe_info(full_params)
+
+    # Error check
     if recipes_info == []:
         return redirect(url_for('error'))
     else:

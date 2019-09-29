@@ -1,22 +1,29 @@
+// UPDATES RESULTS.HTML
+
+// Grab recipe results and store in variable
 var myRecipes = JSON.parse(document.getElementById("myRecipes").dataset.recipe);
 var recipe_images = myRecipes.map(d => d.image);
 console.log(recipe_images);
 
+// Main function that calls all subfunctions
 function recipe_results_page(recipe) {
     quick_info_plot(recipe);
     nutrition_plot(recipe);
     ingredients_list(recipe);
     instructions_list(recipe);
     recipe_summary(recipe);
-    title_image(recipe);
 }
+
+// Updates nutriontanl summary table
 function quick_info_plot(recipe) {
     var nutrition = recipe['nutrients'];
     var healthScore = recipe['healthScore'];
 
     var titles = ['Calories', 'Fat', 'Carbohydrates', 'Protein'];
     var quick_info_dict = { hScore: `${Math.round(healthScore)}% Health Score` }
+
     nutrition.forEach(info => {
+
         if (titles.includes(info.title)) {
             switch (info.title) {
                 case 'Calories':
@@ -33,8 +40,10 @@ function quick_info_plot(recipe) {
                     break;
             }
         }
+
     });
     var quick_info = [quick_info_dict];
+
     var quick_info_table = d3.select("#quick-info").select("thead");
     quick_info_table.html("");
 
@@ -50,14 +59,18 @@ function quick_info_plot(recipe) {
     console.log(quick_info)
 }
 
+// Updates nutrition bar chart
 function nutrition_plot(recipe) {
     var names = recipe['nutrients'].map(item => item.title);
     var percentage = recipe['nutrients'].map(item => item.percentOfDailyNeeds);
 
+    // Format direct lables that will be displayed on each bar
     var labels = []
     percentage.forEach(percent => {
         labels.push(`${Math.round(percent)}%`)
     })
+
+    // "Bad" nutrients
     var trace1 = {
         x: percentage.slice(0, 7),
         y: names.slice(0, 7),
@@ -70,6 +83,8 @@ function nutrition_plot(recipe) {
         },
         name: "Limit These"
     };
+
+    // "Good" nutrients
     var trace2 = {
         x: percentage.slice(7, (percentage.length - 1)),
         y: names.slice(7, (names.length - 1)),
@@ -106,7 +121,9 @@ function nutrition_plot(recipe) {
     Plotly.newPlot("nutrition-plot", data, layout)
 }
 
+// Updates ingredients list
 function ingredients_list(recipe) {
+
     var ingredients = recipe['ingredients'];
     var ingred_list = d3.select('#ingredients').select("ul");
     ingred_list.html("");
@@ -121,7 +138,9 @@ function ingredients_list(recipe) {
         });
 }
 
+// Updates instrucitons list
 function instructions_list(recipe) {
+
     var instructions = recipe['instructions'];
     var instruct_list = d3.select('#instructions').select("ul");
     instruct_list.html("");
@@ -139,30 +158,31 @@ function instructions_list(recipe) {
     // console.log(instructions)
 }
 
+// Updates title, image, and recipe discription
 function recipe_summary(recipe) {
-    var summary = [String(recipe['summary'])];
 
-    d3.select("#recipe_summary")
-        .select("p")
-        .data(summary)
-        .html(function (d) {
-            return d
-        })
-}
-
-function title_image(recipe) {
     var title = d3.select('#results-wrap').select("h1");
     var image = d3.select('#recipe-image').select("img");
+    var description = [String(recipe['summary'])];
 
     title.html("");
     image.html("");
 
     title.text(recipe.title);
     image.attr("src", recipe.image);
+
+    d3.select("#recipe_summary")
+        .select("p")
+        .data(description)
+        .html(function (d) {
+            return d
+        })
 }
+
+// Initialize results dashboard with data about first recipe in list of 10
 function init() {
     var selector = d3.select("#select-recipe");
-    // Use the list of titles to populate the select options
+
     myRecipes.forEach((recipe) => {
         selector
             .append("option")
@@ -170,12 +190,10 @@ function init() {
             .property("value", recipe.image);
     });
 
-    // Use the first recipe from the list to build the initial results page
-    // d3.select('#results-wrap').select("h1").text(myRecipes[0].title);
-    // d3.select('#recipe-image').append("img").attr("src", myRecipes[0].image)
     recipe_results_page(myRecipes[0]);
 }
 
+// Update resutls dashboard if new recipe is selected
 function recipe_changed(newRecipeImage) {
     var new_recipe_index = recipe_images.indexOf(String(newRecipeImage));
     var new_recipe = myRecipes[new_recipe_index];

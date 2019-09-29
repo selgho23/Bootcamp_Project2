@@ -10,25 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Calligraffitti" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<style>
-    #myProgress {
-        width: 100%;
-        background-color: #ddd;
-        border: 10px solid 119425;
-        border-radius: 10px;
-    }
-
-    #myBar {
-        width: 0%;
-        height: 30px;
-        background-color: #5cb85c;
-        border: 10px solid 119425;
-        border-radius: 10px;
-        color: whitesmoke;
-        text-align: center;
-    }
-</style>
-
 <body>
     <div class="header">
         <nav class="navbar navbar-default justify-content-end">
@@ -88,7 +69,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeGeneral()" id="general-btn" type="submit" name="btn-identifier"
+                                <button id="general-btn" type="submit" name="btn-identifier"
                                     value="general-btn" class="btn btn-default">Submit</button>
                             </form>
                         </div>
@@ -148,7 +129,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeMacros()" id="macros-btn" type="submit" name="btn-identifier"
+                                <button id="macros-btn" type="submit" name="btn-identifier"
                                     value="macros-btn" class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
@@ -171,7 +152,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeIngreds() " id="ingredients-btn" type="submit"
+                                <button id="ingredients-btn" type="submit"
                                     name="btn-identifier" value="ingredients-btn"
                                     class="btn btn-default selection-btn">Submit</button>
                             </form>
@@ -195,7 +176,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button onclick="changeDescr()" id="description-btn" type="submit" name="btn-identifier"
+                                <button id="description-btn" type="submit" name="btn-identifier"
                                     value="description-btn" class="btn btn-default selection-btn">Submit</button>
                             </form>
                         </div>
@@ -207,39 +188,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="../static/js/app.js"></script>
-    <script>
-        function changeButton(button) {
-            button.style.background = '#5cb85c';
-            button.style.color = "white";
-            button.innerHTML = "Success!";
-        }
-        function changeMacros() { changeButton(document.getElementById("macros-btn")); }
-        function changeIngreds() { changeButton(document.getElementById("ingredients-btn")); }
-        function changeDescr() { changeButton(document.getElementById("description-btn")); }
-        function changeGeneral() {
-            var button = document.getElementById("general-btn");
-            button.style.background = '#5cb85c';
-            button.style.color = "white";
-            button.innerHTML = "Scroll Down";
-        }
-    </script>
-    <script>
-        function move() {
-            var elem = document.getElementById("myBar");
-            var width = 1;
-            var id = setInterval(frame, 140);
-            function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
-                } else {
-                    width++;
-                    elem.style.width = width + '%';
-                    elem.innerHTML = width * 1 + '%';
-                }
-            }
-        }
-    </script>
-
 </body>
 
 </html>

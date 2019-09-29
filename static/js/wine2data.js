@@ -1,3 +1,5 @@
+// DATA FOR USE WITH WINE_RECOMMENDATION.HTML
+
 var data = [
     {
         "Best_Wine": "Rombauer Merlot",

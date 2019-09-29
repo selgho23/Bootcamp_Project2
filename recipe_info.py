@@ -8,12 +8,14 @@ random_indices = []
 
 def get_recipe_info(user_params):
 
-    # user_params["offset"] = np.random.randint(0,11)
+    user_params["offset"] = np.random.randint(0,11)
 
     # Get 10 recipe_ids matching form input criteria
     search_url = "https://api.spoonacular.com/recipes/complexSearch"
     ten_recipes = requests.get(search_url, params=user_params).json()
 
+    # Error check - return an empty list if user's selection criteria did not 
+    # produce any recipe results
     if ten_recipes['totalResults'] == 0:
         return []
     else:
@@ -28,6 +30,7 @@ def get_recipe_info(user_params):
         }
         recipe_response = requests.get(recipe_info_url, params=info_params).json()
 
+        # Make a new API call to get recipe summary/description
         recipes_info = []
         for recipe in recipe_response:
             summary_url = f"https://api.spoonacular.com/recipes/{recipe['id']}/summary"
@@ -41,6 +44,9 @@ def get_recipe_info(user_params):
                             'spoonacularScore', 'id', 'title', 'healthScore'
                             ]
 
+            # Some recipes don't include instructions - ignore these
+            # Otherwise, package all relevant recipe info in a dictionary and
+            # store dictionaries in a list
             bad_recipe = False
             for key, value in recipe.items():
                 if key == "analyzedInstructions":
@@ -72,6 +78,7 @@ def get_recipe_info(user_params):
                                 "href"
                                 ]
 
+            # Remove hyperlinks from recipe summary/description
             for string in strings_to_delete:
                 summary_split = recipe_info['summary'].split(string, 2)
                 if len(summary_split) == 2 and string == ". Try":

@@ -1,6 +1,7 @@
 // create a variable for data.js
 var tableData = data;
-// console.log the data from data.js
+
+// Examine data
 var titles = data.map(d => d.title);
 var descriptions = data.map(d => d.Description);
 var image_urls = data.map(d => d.url);
@@ -8,23 +9,22 @@ var ratings = data.map(d => d.avg_rating);
 var prices = data.map(d => d.price);
 var names = data.map(d => d.Name);
 
+// Select wine recommendation table
 var wine_table = d3.select('#food-table').select('tbody');
 wine_table.html("");
-// select the input botton
 
+// Update wine recommendation table
 var filterbtn = d3.select("#filter-btn");
 filterbtn.on("click", function () {
+
     filteredData = tableData;
-    // Prevent the page from refreshing
     d3.event.preventDefault();
 
-
-    // Select the input element For multiple table columns and get the raw HTML node
     var inputElement = d3.select("#winetype");
-    // Get the value property of the input element for all table columns 
     var inputValue = inputElement.property("value").toLowerCase();
     console.log(inputValue);
-    //filter the data if user gives any user input
+
+    //filter the data according to user input
     if (inputValue != "") {
         filteredData = filteredData.filter(wine_recommendation_data => wine_recommendation_data.Name === inputValue);
     }
@@ -43,16 +43,8 @@ filterbtn.on("click", function () {
             return `<td>${d.title}</td><td>${d.avg_rating*100}</td><td>${d.price}</td><td>${d.Description}</td><th><img src=${d.url}></th>`
         });
 });
- 
-// Submit Button handler
-function handleSubmit() {
-    wine_table.html("");
-    // Prevent the page from refreshing
-    d3.event.preventDefault();
-    d3.select("#more_info").node().value = "";
-    buildPlot(data);
-}
 
+// Build wine ratings and price plot
 function buildPlot(data) {
     var ratings = data.map(d => d.avg_rating * 100);
     var prices = data.map(d => d.price);
@@ -60,11 +52,13 @@ function buildPlot(data) {
     var names = data.map(d => d.Name);
     console.log(titles);
 
+    // Format price label
     var price_label = []
     prices.forEach(price => {
         price_label.push(`${price}`)
     });
 
+    // Price
     var trace1 = {
         y: prices,
         x: names,
@@ -76,6 +70,8 @@ function buildPlot(data) {
         },
         name: "Price",
     };
+
+    // Rating
     var trace2 = {
         y: ratings,
         x: names,
@@ -118,8 +114,10 @@ function buildPlot(data) {
     Plotly.newPlot("plot", data, layout)
 }
 
+// Initialize page with bar chart
 function init() {
     d3.select("#more_info").node().value = "";
     buildPlot(data);
 }
+
 init();

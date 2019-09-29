@@ -5,6 +5,44 @@ body {
   margin: 0;
 }
 
+td { background-color: floralwhite; }
+  
+.jumbotron {
+    background-color:floralwhite;
+    width: 90%;   
+}
+
+.custom-button {
+  background: gray;
+  color: whitesmoke;
+  font-family: 'Papyrus', fantasy;
+  font-size: 15px;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 10px;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  border: 10px solid 119425;
+  border-radius: 10px;
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #5cb85c;
+  border: 10px solid 119425;
+  border-radius: 10px;
+  color: whitesmoke;
+  text-align: center;
+}
+
+#food-table {
+  background: white;
+}
+
 .navbar-brand {
   font-weight: bold;
   color: #fff4e6 !important;
