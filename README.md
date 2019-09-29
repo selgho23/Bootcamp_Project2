@@ -7,7 +7,7 @@ The aim of this project was to create a multiple webpage application supported b
 - Find the best suppliear of a given wine.
 
 ## Data Source
-Our search engine was powered by Spoonacular API.
+All data was pulled from the Spoonacular API.
 
 ## Testing the Application
 If you would like to test out the application
