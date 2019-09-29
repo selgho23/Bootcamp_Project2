@@ -20,11 +20,13 @@ If you would like to test out the application
 
 ## Here's a preview of our application
 Recipe Search Page
+
     <img width='500'
      height='300'
      src='static/images/recipe_search_page.png'>
 
 Wine Pairing Page
+
     <img width='500'
      height='300'
      src='static/images/wine_pair_page.png'>
