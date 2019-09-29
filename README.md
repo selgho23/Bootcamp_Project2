@@ -17,8 +17,8 @@ If you would like to test out the application
 - Create a file titled config.py.
     - Within the file, create a variable called: apiKey = "".
     - Copy your API key into the file.
-- Run the command python app.py in a terminal
-- Copy web address: [http://127.0.0.1:5000](#)
+- Run the command python app.py in a terminal.
+- Copy the web address, [http://127.0.0.1:5000](#) into you preferred search engine.
 
 ## Here's a preview of our application
 #### Recipe Search Page
