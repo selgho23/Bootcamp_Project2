@@ -33,8 +33,8 @@ If you would like to test out the application
  
      
 #### Wine recommendation page 
-<img width='5000'
-     height='3000'
+<img width='1500'
+     height='2500'
      src='winepage_image.png'>
      
      
