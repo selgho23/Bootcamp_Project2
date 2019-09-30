@@ -35,7 +35,7 @@ If you would like to test out the application
 #### Wine recommendation page 
 <img width='1000'
      height='300'
-     src='wine_page_image.png'>
+     src='winepage_image.png'>
      
 
  
