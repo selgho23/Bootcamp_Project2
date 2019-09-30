@@ -32,9 +32,11 @@ If you would like to test out the application
      src='static/images/wine_pair_page.png'>
  
      
-#### Wine recommendation
+#### Wine recommendation page 
 <img width='1000'
-     height='600'
-     src='static/images/wine_.png'>
+     height='300'
+     src='wine_page_image.png'>
+     
+
  
      
