@@ -34,4 +34,4 @@ If you would like to test out the application
 #### Wine Recommendation
 <img width='500'
      height='300'
-     src='static/images/recipe_search_page.png'>
+     src='khushboo_branch_wine_recommendation/static/images/recipe_search_page.png'>
