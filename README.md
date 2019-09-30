@@ -30,3 +30,4 @@ If you would like to test out the application
 <img width='500'
      height='300'
      src='static/images/wine_pair_page.png'>
+     
