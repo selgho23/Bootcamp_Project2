@@ -31,7 +31,3 @@ If you would like to test out the application
      height='300'
      src='static/images/wine_pair_page.png'>
      
-#### Wine Recommendation
-<img width='500'
-     height='300'
-     src='khushboo_branch_wine_recommendation/static/images/recipe_search_page.png'>
