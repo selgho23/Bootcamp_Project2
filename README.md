@@ -27,7 +27,7 @@ If you would like to test out the application
      src='static/images/recipe_search_page.png'>
 
 #### Wine Pairing Page
-<img width='500'
-     height='300'
+<img width='1000'
+     height='800'
      src='winepage_image.png'>
      
